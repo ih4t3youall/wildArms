@@ -21,7 +21,7 @@ import ar.com.sourcesistemas.wildArms.entities.Command;
 public class MessageSender {
  
  
-    private static final String URL = "tcp://localhost:61616";
+    private static final String URL = "tcp://93.188.167.193:61616";
  
     private static final String USER = "admin";
  

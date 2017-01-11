@@ -5,7 +5,6 @@ import javax.jms.JMSException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -14,6 +13,7 @@ import ar.com.sourcesistemas.wildArms.activeMq.MessageSender;
 import ar.com.sourcesistemas.wildArms.activeMq.Test;
 import ar.com.sourcesistemas.wildArms.entities.Command;
 import ar.com.sourcesistemas.wildArms.entities.Constantes;
+import ar.com.sourcesistemas.wildArms.mecanizator.Recorder;
 
 @Controller
 public class WildArmController {
@@ -23,8 +23,13 @@ public class WildArmController {
 
 	@Autowired
 	private MessageSender messageSender;
+	
+	@Autowired
+	private Recorder recorder;
 
 	private ObjectMapper objMap = new ObjectMapper();
+
+	private boolean grabar = false;
 
 	@RequestMapping("index")
 	public ModelAndView index() {
@@ -48,27 +53,37 @@ public class WildArmController {
 		mav.addObject("precision_mas", Constantes.PRECISION_MAS);
 		mav.addObject("precision_menos", Constantes.PRECISION_MENOS);
 
-
 		return mav;
 
 	}
 
 	@RequestMapping("mover")
-	public void mover( String movimiento) {
+	public void mover(String movimiento) {
+		if (!grabar) {
+			System.out.println(movimiento);
 
-		System.out.println(movimiento);
-		
-		Command command = new Command();
-		command.setCommand(movimiento);
+			Command command = new Command();
+			command.setCommand(movimiento);
 
-		try
+			try
 
-		{
-			messageSender.sendMessage(command);
-		} catch (JMSException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			{
+				messageSender.sendMessage(command);
+			} catch (JMSException e) {
+				e.printStackTrace();
+			}
+
+		} else {
+
+			
+			
+			
 		}
+
+	}
+
+	@RequestMapping("grabar")
+	public void grabar() {
 
 	}
 
