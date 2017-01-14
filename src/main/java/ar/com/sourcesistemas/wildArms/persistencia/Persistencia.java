@@ -1,4 +1,4 @@
-package ar.com.Snipplet.persistencia;
+package ar.com.sourcesistemas.wildArms.persistencia;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -53,7 +53,9 @@ public class Persistencia {
 
 	}
 
-	public void guardar(Object obj, String filename) throws IOException {
+
+	
+	public void save(String filename, List<String> obj) throws IOException {
 
 		if (existeArchivo(filename)) {
 			FileOutputStream fileOut;
@@ -118,5 +120,6 @@ public class Persistencia {
 		new File(newPrefix).mkdir();
 
 	}
+
 
 }

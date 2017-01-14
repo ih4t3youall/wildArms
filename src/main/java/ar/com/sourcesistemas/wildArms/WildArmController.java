@@ -1,10 +1,14 @@
 package ar.com.sourcesistemas.wildArms;
 
+import java.io.IOException;
+
 import javax.jms.JMSException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -23,7 +27,7 @@ public class WildArmController {
 
 	@Autowired
 	private MessageSender messageSender;
-	
+
 	@Autowired
 	private Recorder recorder;
 
@@ -75,15 +79,33 @@ public class WildArmController {
 
 		} else {
 
-			
-			
-			
 		}
 
 	}
 
+	@RequestMapping("iniciarGrabacion")
+	public void iniciarGrabacion(@RequestParam String nombre) {
+
+		recorder.setNamee(nombre);
+
+	}
+
 	@RequestMapping("grabar")
-	public void grabar() {
+	public @ResponseBody String grabar(@RequestParam String movimiento) {
+		recorder.addMovement(movimiento);
+		return "200ok";
+	}
+
+	@RequestMapping("guardar")
+	public String guardar() {
+
+		try {
+			recorder.save();
+		} catch (IOException e) {
+			return "500, error al guardar";
+		}
+
+		return "200ok, guardado con exito!";
 
 	}
 

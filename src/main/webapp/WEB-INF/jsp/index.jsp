@@ -15,25 +15,56 @@
 <title>Insert title here</title>
 
 <script type="text/javascript">
+var grabando = false;
+
 	function disableText() {
 
 		var  isDisabled = $("#text").is(":enabled");
 		
 		if(isDisabled){
+			console.log("esta disabled");
 			$("#text").prop("disabled", true);	
-			
+			grabando =false;
+			guardarCambios();
 		}else{
+			console.log("esta enabled");
 			$("#text").prop("disabled", false);
+			grabando = true;
 			
 		}
 		
 		
 		
 	}
+	
+	function guardarCambios(){
+		
+		$.ajax({
+			type : "GET",
+			contentType : "application/json",
+			url : "guardar",
+			success : function(data) {
+				alert("se empiezan a guardar los movimientos");
+
+			},
+			error : function(e) {
+				
+				console.log(e);
+				alert("error");
+				
+			},
+			done : function(e) {
+				alert("done");
+			}
+		});
+		
+		
+	}
 
 	$(document).ready(function() {
 		
-		disableText();
+		$("#text").prop("disabled", true);
+		$('#text').val("");
 		
 		
 	});
@@ -47,17 +78,18 @@
 	
 	function empezarAGrabar(){
 		
-		
+		console.log("empiezo a grabar");
 		$.ajax({
 			type : "GET",
 			contentType : "application/json",
-			url : "mover",
-			data : "grabar=true",
+			url : "iniciarGrabacion",
+			data:"nombre="+$("#text").val(),
 			success : function(data) {
-				console.log("gg");
+				alert("se empiezan a guardar los movimientos");
 
 			},
 			error : function(e) {
+				alert("error");
 				console.log("ERROR: ", e);
 				console.log(e);
 			},
@@ -71,6 +103,8 @@
 	function mover(movimiento) {
 
 		// 	console.log(movimiento);
+		if(!grabando){
+			console.log("movimientos directos");
 		$.ajax({
 			type : "GET",
 			contentType : "application/json",
@@ -89,6 +123,27 @@
 				console.log("DONE");
 			}
 		});
+		}else{
+			console.log("grabacion");
+			$.ajax({
+				type : "GET",
+				contentType : "application/json",
+				url : "grabar",
+				data : "movimiento=" + movimiento,
+				success : function(data) {
+					console.log("se grabo 1 movimiento");
+
+				},
+				error : function(e) {
+					
+					console.log("error de grabacion!");
+				},
+				done : function(e) {
+					console.log("DONE");
+				}
+			});			
+			
+		}
 
 	}
 </script>
@@ -175,6 +230,7 @@
 				<label for="usr">Nombre archivo:</label> <input id="text"
 					type="text" class="form-control" id="usr">
 			</div>
+			<button type="button" class="btn btn-primary btn-sm" onclick="empezarAGrabar">empezar</button>
 
 		</div>
 		<div class="col-md-2">

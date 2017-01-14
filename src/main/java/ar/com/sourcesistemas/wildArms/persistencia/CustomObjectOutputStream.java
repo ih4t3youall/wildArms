@@ -1,4 +1,4 @@
-package ar.com.Snipplet.persistencia;
+package ar.com.sourcesistemas.wildArms.persistencia;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
