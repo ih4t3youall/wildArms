@@ -7,11 +7,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.LinkedList;
 import java.util.List;
 
-import javax.swing.JOptionPane;
-
 import org.springframework.stereotype.Repository;
+
+import ar.com.sourcesistemas.wildArms.entities.Constantes;
 
 @Repository
 public class Persistencia {
@@ -21,6 +22,12 @@ public class Persistencia {
 	private String sistemaOperativo;
 	private String userHome;
 
+	
+	public String getPrefix(){
+		
+		return prefix;
+	}
+	
 	public void setPrefix(String prefix) {
 		this.prefix = prefix;
 	}
@@ -29,7 +36,7 @@ public class Persistencia {
 
 		sistemaOperativo = System.getProperty("os.name");
 		userHome = System.getProperty("user.home") + "/";
-		prefix = userHome + "wildArms/";
+		prefix = userHome + Constantes.NOMBRE_CARPETA+"/";
 		inicializarCarpetas();
 
 	}
@@ -117,9 +124,36 @@ public class Persistencia {
 		file.delete();
 	}
 
-	public void createFolder(String newPrefix) {
-		new File(newPrefix).mkdir();
+	public void createFolder(String name) {
+		new File(prefix+name).mkdir();
 
+	}
+	
+	public String[] findAllFiles(String name ){
+		
+		if(name == null){
+			return new File(prefix).list();
+			
+		}else{
+			return new File(prefix+name).list();
+			
+		}
+		
+	}
+
+	public List<Object> loadAll() {
+		String[] findAllFiles = findAllFiles(null);
+		
+		List<Object> list= new LinkedList<Object>();
+		for (int i = 0; i < findAllFiles.length; i++) {
+			
+			Object recoverFile = recoverFile(findAllFiles[i]);
+			list.add(recoverFile);
+			
+		}
+		
+		return list;
+		
 	}
 
 

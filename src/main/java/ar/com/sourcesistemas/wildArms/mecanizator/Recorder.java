@@ -38,9 +38,23 @@ public class Recorder {
 		
 		
 		persistencia.save(mov.getNombre(),mov);
-		Object recoverFile = persistencia.recoverFile(mov.getNombre());
-		MovimientosGuardados movi = (MovimientosGuardados)recoverFile;
-		System.out.println("pal breakepointe");
+		
+		
+	}
+	
+	public List<MovimientosGuardados> getAllMovements(){
+		
+		List<Object> loadAll = persistencia.loadAll();
+		
+		List<MovimientosGuardados> movs = new LinkedList<MovimientosGuardados>();
+		for (Object object : loadAll) {
+			
+			movs.add((MovimientosGuardados)object);	
+			
+		}
+		
+		return movs;
+		
 	}
 	
 	

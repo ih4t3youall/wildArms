@@ -25,4 +25,6 @@ public final class Constantes {
 	public static final String PRECISION_MAS = "Precicion mas";
 	public static final String PRECISION_MENOS = "Precicion menos";
 	
+	public static final String NOMBRE_CARPETA = "wildArms"; 
+	
 }
