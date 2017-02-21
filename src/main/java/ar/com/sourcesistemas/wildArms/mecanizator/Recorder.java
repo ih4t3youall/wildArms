@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import ar.com.sourcesistemas.wildArms.entities.MovimientosGuardados;
 import ar.com.sourcesistemas.wildArms.persistencia.Persistencia;
 
 @Repository
@@ -33,14 +34,13 @@ public class Recorder {
 	} 
 	
 	
-	public void save() throws IOException{
+	public void save(MovimientosGuardados mov) throws IOException{
 		
 		
-		persistencia.save(name,movements);
-		name = "";
-		movements.clear();
-		
-		
+		persistencia.save(mov.getNombre(),mov);
+		Object recoverFile = persistencia.recoverFile(mov.getNombre());
+		MovimientosGuardados movi = (MovimientosGuardados)recoverFile;
+		System.out.println("pal breakepointe");
 	}
 	
 	

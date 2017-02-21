@@ -6,7 +6,9 @@ import javax.jms.JMSException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -17,7 +19,10 @@ import ar.com.sourcesistemas.wildArms.activeMq.MessageSender;
 import ar.com.sourcesistemas.wildArms.activeMq.Test;
 import ar.com.sourcesistemas.wildArms.entities.Command;
 import ar.com.sourcesistemas.wildArms.entities.Constantes;
+import ar.com.sourcesistemas.wildArms.entities.MovimientosGuardados;
 import ar.com.sourcesistemas.wildArms.mecanizator.Recorder;
+
+
 
 @Controller
 public class WildArmController {
@@ -27,6 +32,9 @@ public class WildArmController {
 
 	@Autowired
 	private MessageSender messageSender;
+	
+	@Autowired
+	private ObjectMapper objectMapper;
 
 	@Autowired
 	private Recorder recorder;
@@ -63,7 +71,6 @@ public class WildArmController {
 
 	@RequestMapping("mover")
 	public void mover(String movimiento) {
-		if (!grabar) {
 			System.out.println(movimiento);
 
 			Command command = new Command();
@@ -77,36 +84,28 @@ public class WildArmController {
 				e.printStackTrace();
 			}
 
-		} else {
-
-		}
 
 	}
 
-	@RequestMapping("iniciarGrabacion")
-	public void iniciarGrabacion(@RequestParam String nombre) {
-
-		recorder.setNamee(nombre);
-
-	}
-
-	@RequestMapping("grabar")
-	public @ResponseBody String grabar(@RequestParam String movimiento) {
-		recorder.addMovement(movimiento);
-		return "200ok";
-	}
-
-	@RequestMapping("guardar")
-	public String guardar() {
-
+	
+	@RequestMapping(value = "movimientosGrabados", method = RequestMethod.GET)
+	public void movimientosGrabados(@RequestParam(value="array",required=true) String[] array,@RequestParam(value="nombre",required=true) String nombre){
+		
+		MovimientosGuardados mov = new MovimientosGuardados(nombre,array);
+		
 		try {
-			recorder.save();
+			recorder.save(mov);
 		} catch (IOException e) {
-			return "500, error al guardar";
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("volo todo al carajo");
 		}
-
-		return "200ok, guardado con exito!";
-
+		
+		
+		
 	}
+	
+
+
 
 }

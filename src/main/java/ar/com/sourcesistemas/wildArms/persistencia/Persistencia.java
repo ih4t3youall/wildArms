@@ -55,9 +55,12 @@ public class Persistencia {
 
 
 	
-	public void save(String filename, List<String> obj) throws IOException {
+	public void save(String filename, Object obj) throws IOException {
 
 		if (existeArchivo(filename)) {
+			
+			eliminarYCrearArchivo(filename);
+		}
 			FileOutputStream fileOut;
 			ObjectOutputStream obj_out = null;
 			try {
@@ -74,19 +77,17 @@ public class Persistencia {
 
 			}
 
-		} else {
-
-			JOptionPane.showMessageDialog(null, "Error el archivo no existe!.");
-
-		}
 	}
 
-	public List<String> recoverFile(File file) {
+	public Object recoverFile(String filename) {
+		File file = new File(prefix + filename);
+		
+		
 		if (file.exists()) {
 			ObjectInputStream ois = null;
 			try {
 				ois = new ObjectInputStream(new FileInputStream(file));
-				return (List<String>) ois.readObject();
+				return  ois.readObject();
 
 			} catch (Exception e) {
 				e.printStackTrace();
