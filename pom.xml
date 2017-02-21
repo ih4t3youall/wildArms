@@ -35,20 +35,21 @@
 			<artifactId>json-path</artifactId>
 			<scope>test</scope>
 		</dependency>
-		
-		
+
+
 		<dependency>
 			<groupId>commons-logging</groupId>
 			<artifactId>commons-logging</artifactId>
 			<version>1.2</version>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/javax.servlet.jsp.jstl/javax.servlet.jsp.jstl-api -->
+		
 		<dependency>
-			<groupId>javax.servlet.jsp.jstl</groupId>
-			<artifactId>javax.servlet.jsp.jstl-api</artifactId>
-			<version>1.2.1</version>
+			<groupId>jstl</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
 		</dependency>
+
 
 		<dependency>
 			<groupId>org.apache.tomcat.embed</groupId>
@@ -69,6 +70,15 @@
 			<groupId>org.apache.activemq</groupId>
 			<artifactId>activemq-core</artifactId>
 			<version>5.4.2</version>
+		</dependency>
+
+		<!-- Need this to compile JSP, tomcat-embed-jasper version is not working, 
+			no idea why -->
+		<dependency>
+			<groupId>org.eclipse.jdt.core.compiler</groupId>
+			<artifactId>ecj</artifactId>
+			<version>4.6.1</version>
+			<scope>provided</scope>
 		</dependency>
 
 	</dependencies>

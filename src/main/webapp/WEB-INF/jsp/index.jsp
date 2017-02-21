@@ -1,4 +1,5 @@
-
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -8,112 +9,130 @@
 <title>Insert title here</title>
 
 <script type="text/javascript">
+	var nombreRecord;
+	var grabando = false;
+	var arrayMovs = [];
 
-var nombreRecord ;
-var grabando =false;
-var arrayMovs = [];
-function mover(movimiento){
-	
-	
-	if(grabando){
-		
-		movimientoGrabacion(movimiento);
-	}
-	
-// 	console.log(movimiento);
-	$.ajax({
-		type : "GET",
-		contentType : "application/json",
-		url : "mover",
-		
-		data :"movimiento="+movimiento,
-		success : function(data) {
-			console.log("gg");
-			
-		},
-		error : function(e) {
-			console.log("ERROR: ", e);
-			console.log(e);
-		},
-		done : function(e) {
-			console.log("DONE");
-		}
+	$(document).ready(function() {
+		$("#nombreGrabacion").val("");
 	});
-	
-	
-}
 
+	function mover(movimiento) {
 
-function comenzarGrabacion(){
-	$('#nombreGrabacion').attr("disabled","true")
+		if (grabando) {
 
+			movimientoGrabacion(movimiento);
+		}
 
-	grabando = true;
+		// 	console.log(movimiento);
+		$.ajax({
+			type : "GET",
+			contentType : "application/json",
+			url : "mover",
 
-	
-	
-}
+			data : "movimiento=" + movimiento,
+			success : function(data) {
+				console.log("gg");
 
-function movimientoGrabacion(movimiento){
-	console.log("movimiento grabacion");
-	arrayMovs.push(movimiento);
-	
-	$("#tablaMovimientos").append(movimiento);
-	$("#tablaMovimientos").append("<br/>");
-	
-	
-}
+			},
+			error : function(e) {
+				console.log("ERROR: ", e);
+				console.log(e);
+			},
+			done : function(e) {
+				console.log("DONE");
+			}
+		});
 
-function detenerGrabacion(){
-	
+	}
 
-	// Array
-	var sendArray = [];
+	function precargado(nombreFile) {
 
+		$.ajax({
+			type : "GET",
+			contentType : "application/json",
+			url : "ejecutarPreCargado",
+			data : "nombre=" + nombreFile,
+			success : function(data) {
+				console.log("gg");
+
+			},
+			error : function(e) {
+				console.log("ERROR: ", e);
+				console.log(e);
+			},
+			done : function(e) {
+				console.log("DONE");
+			}
+		});
+
+	}
+
+	function comenzarGrabacion() {
+
+		if ($("#nombreGrabacion").val() == "") {
+			alert("debe escribir un nombre para el block de movimientos");
+
+		} else {
+			$('#nombreGrabacion').attr("disabled", "true")
+			grabando = true;
+		}
+
+	}
+
+	function movimientoGrabacion(movimiento) {
+		console.log("movimiento grabacion");
+		arrayMovs.push(movimiento);
+
+		$("#tablaMovimientos").append(movimiento);
+		$("#tablaMovimientos").append("<br/>");
+
+	}
+
+	function detenerGrabacion() {
+
+		// Array
+		var sendArray = [];
 
 		var nombre = $('#nombreGrabacion').val();
-	
-	console.log(nombreRecord);
-	
-	
-	$(arrayMovs).each(function (index,item){
-		
-		sendArray.push(item);
-		
-		
-	})
-	
-	
-	
-	
-// 	var array =  JSON.parse(sendArray);
-// 	var array = JSON.parse(JSON.stringify(sendArray))
-// 	var array = JSON.stringify(sendArray);
-	
-	$.ajax({
-		type : "GET",
-		contentType : "application/json",
-		url : "movimientosGrabados",
-		dataType : "json",
-		data :"array="+sendArray+"&nombre="+nombre,
-		success : function(data) {
-			console.log("gg");
-			
-		},
-		error : function(e) {
-			console.log("ERROR: ", e);
-			console.log(e);
-		},
-		done : function(e) {
-			console.log("DONE");
-		}
-	
-});
-	
-	
-}
+
+		//limpio la tabla
+		$("#tablaMovimientos").empty();
+		//reactivo el boton 
+		$('#nombreGrabacion').removeAttr("disabled");
+		grabando = false;
+
+		console.log(nombreRecord);
+
+		$(arrayMovs).each(function(index, item) {
+
+			sendArray.push(item);
+
+		})
 
 
+		$.ajax({
+			type : "GET",
+			contentType : "application/json",
+			url : "movimientosGrabados",
+			dataType : "json",
+			data : "array=" + sendArray + "&nombre=" + nombre,
+			success : function(data) {
+				console.log("gg");
+
+			},
+			error : function(e) {
+				console.log("ERROR: ", e);
+				console.log(e);
+			},
+			done : function(e) {
+				console.log("DONE");
+			}
+
+		});
+		
+
+	}
 </script>
 
 </head>
@@ -123,48 +142,58 @@ function detenerGrabacion(){
 	<div class="row">
 		<div class="col-md-3"></div>
 		<div class="col-md-2">
-			<a href="#" class="btn btn-default" role="button" onclick="mover('${cama_arriba}')" >cama arriba</a>
+			<a href="#" class="btn btn-default" role="button"
+				onclick="mover('${cama_arriba}')">cama arriba</a>
 		</div>
 		<div class="col-md-2">
-			<a href="#" class="btn btn-default" role="button"onclick="mover('${adelante}')" >adelante</a>
+			<a href="#" class="btn btn-default" role="button"
+				onclick="mover('${adelante}')">adelante</a>
 		</div>
 		<div class="col-md-2">
-			<a href="#" class="btn btn-default" role="button" onclick="mover('${munieca_arriba}')">muñeca arriba</a>
-		</div>
-		<div class="col-md-3"></div>
-	</div>
-	<div class="row">
-		<div class="col-md-3"></div>
-		<div class="col-md-2">
-			<a href="#" class="btn btn-default" role="button" onclick="mover('${cama_abajo}')">cama abajo</a>
-		</div>
-		<div class="col-md-2">
-			<a href="#" class="btn btn-default" role="button" onclick="mover('${atras}')">atras</a>
-		</div>
-		<div class="col-md-2">
-			<a href="#" class="btn btn-default" role="button" onclick="mover('${munieca_abajo}')">muñeca abajo</a>
+			<a href="#" class="btn btn-default" role="button"
+				onclick="mover('${munieca_arriba}')">muñeca arriba</a>
 		</div>
 		<div class="col-md-3"></div>
 	</div>
 	<div class="row">
 		<div class="col-md-3"></div>
 		<div class="col-md-2">
-			<a href="#" class="btn btn-default" role="button" onclick="mover('${abrir_pinza}')">abrir pinza</a>
+			<a href="#" class="btn btn-default" role="button"
+				onclick="mover('${cama_abajo}')">cama abajo</a>
+		</div>
+		<div class="col-md-2">
+			<a href="#" class="btn btn-default" role="button"
+				onclick="mover('${atras}')">atras</a>
+		</div>
+		<div class="col-md-2">
+			<a href="#" class="btn btn-default" role="button"
+				onclick="mover('${munieca_abajo}')">muñeca abajo</a>
+		</div>
+		<div class="col-md-3"></div>
+	</div>
+	<div class="row">
+		<div class="col-md-3"></div>
+		<div class="col-md-2">
+			<a href="#" class="btn btn-default" role="button"
+				onclick="mover('${abrir_pinza}')">abrir pinza</a>
 		</div>
 		<div class="col-md-2"></div>
 		<div class="col-md-2">
-			<a href="#" class="btn btn-default" role="button" onclick="mover('${cerrar_pinza}')">cerrar pinza</a>
+			<a href="#" class="btn btn-default" role="button"
+				onclick="mover('${cerrar_pinza}')">cerrar pinza</a>
 		</div>
 		<div class="col-md-3"></div>
 	</div>
 	<div class="row">
 		<div class="col-md-3"></div>
 		<div class="col-md-2">
-			<a href="#" class="btn btn-default" role="button" onclick="mover('${izquierda}')">izquierda</a>
+			<a href="#" class="btn btn-default" role="button"
+				onclick="mover('${izquierda}')">izquierda</a>
 		</div>
 		<div class="col-md-2"></div>
 		<div class="col-md-2">
-			<a href="#" class="btn btn-default" role="button" onclick="mover('${derecha}')" >derecha</a>
+			<a href="#" class="btn btn-default" role="button"
+				onclick="mover('${derecha}')">derecha</a>
 		</div>
 		<div class="col-md-3"></div>
 	</div>
@@ -173,7 +202,8 @@ function detenerGrabacion(){
 		<div class="col-md-3"></div>
 		<div class="col-md-2">&nbsp;</div>
 		<div class="col-md-2">
-			<a href="#" class="btn btn-default" role="button" onclick="mover('${encender_led}')">encender led</a>
+			<a href="#" class="btn btn-default" role="button"
+				onclick="mover('${encender_led}')">encender led</a>
 		</div>
 		<div class="col-md-2">&nbsp;</div>
 		<div class="col-md-3"></div>
@@ -189,33 +219,44 @@ function detenerGrabacion(){
 	<div class="row">
 		<div class="col-md-3"></div>
 		<div class="col-md-2">
-			<a href="#" class="btn btn-default" role="button" onclick="mover('${precision_mas}')">precision mas</a>
+			<a href="#" class="btn btn-default" role="button"
+				onclick="mover('${precision_mas}')">precision mas</a>
 		</div>
 		<div class="col-md-2">label</div>
 		<div class="col-md-2">
-			<a href="#" class="btn btn-default" role="button" onclick="mover('${precision_menos}')">precision menos</a>
+			<a href="#" class="btn btn-default" role="button"
+				onclick="mover('${precision_menos}')">precision menos</a>
 		</div>
 		<div class="col-md-3"></div>
 	</div>
-	
+
 	<div class="row">
 		<div class="col-md-3"></div>
 		<div class="col-md-2">
-			<a href="#" class="btn btn-default" role="button" onclick="comenzarGrabacion()">Grabar Movimientos</a>
+			<a href="#" class="btn btn-default" role="button"
+				onclick="comenzarGrabacion()">Grabar Movimientos</a>
 		</div>
-		<div class="col-md-2"><input id="nombreGrabacion" type="text" value="nombre"></input></div>
 		<div class="col-md-2">
-			<a href="#" class="btn btn-default" role="button" onclick="detenerGrabacion()">Deteber grabacion</a>
+			<input id="nombreGrabacion" type="text" value="nombre"></input>
+		</div>
+		<div class="col-md-2">
+			<a href="#" class="btn btn-default" role="button"
+				onclick="detenerGrabacion()">Deteber grabacion</a>
 		</div>
 		<div class="col-md-3"></div>
 	</div>
-	
-	
-	<div id="tablaMovimientos">
-	
-	
-	</div>
 
+
+	<div id="tablaMovimientos"></div>
+	<div id="movimientosGuardados">
+		<c:forEach items="${nombresMovimientos}" var="item">
+
+			<input type="button" onClick="precargado('${item}')" value="${item}">
+			</intput>
+
+
+		</c:forEach>
+	</div>
 
 
 

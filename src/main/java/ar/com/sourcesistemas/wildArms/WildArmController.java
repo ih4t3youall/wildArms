@@ -74,7 +74,7 @@ public class WildArmController {
 			nombresMovimientos.add(movimientosGuardados.getNombre());
 		}
 		
-		mav.addObject("nombresMovimientos",nombresMovimientos)
+		mav.addObject("nombresMovimientos",nombresMovimientos);
 		
 		return mav;
 
@@ -98,6 +98,16 @@ public class WildArmController {
 
 	}
 
+	
+	@RequestMapping(value = "ejecutarPreCargado", method=RequestMethod.GET)
+	public void ejecutarPreCargado(@RequestParam(value="nombre", required=true) String nombre){
+		
+		MovimientosGuardados movs = recorder.getMovementsFile(nombre);
+		messageSender.sendPreSetMovementsMessage(movs);
+		
+		
+		
+	}
 	
 	@RequestMapping(value = "movimientosGrabados", method = RequestMethod.GET)
 	public void movimientosGrabados(@RequestParam(value="array",required=true) String[] array,@RequestParam(value="nombre",required=true) String nombre){

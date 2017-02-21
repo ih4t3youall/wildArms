@@ -57,6 +57,13 @@ public class Recorder {
 		
 	}
 	
+	public MovimientosGuardados getMovementsFile(String fileName){
+		
+		MovimientosGuardados movs = (MovimientosGuardados)persistencia.recoverFile(fileName);
+		return movs;
+		
+	}
+	
 	
 	
 }

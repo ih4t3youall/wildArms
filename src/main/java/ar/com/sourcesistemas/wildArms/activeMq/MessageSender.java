@@ -15,6 +15,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import ar.com.sourcesistemas.wildArms.entities.Command;
+import ar.com.sourcesistemas.wildArms.entities.MovimientosGuardados;
 
 
 @Repository
@@ -69,5 +70,24 @@ public class MessageSender {
 		}
         
     }
+
+
+	public void sendPreSetMovementsMessage(MovimientosGuardados movs) {
+		
+		for(String movimiento : movs.getMovimientos()){
+			
+			Command command = new Command();
+			command.setCommand(movimiento);
+			try {
+				sendMessage(command);
+			} catch (JMSException e) {
+				System.out.println("error al enviar el comando "+command.getCommand());
+				e.printStackTrace();
+			}
+			
+		}
+		
+		
+	}
  
 }
