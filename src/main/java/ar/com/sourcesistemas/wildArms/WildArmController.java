@@ -67,14 +67,14 @@ public class WildArmController {
 		mav.addObject("precision_mas", Constantes.PRECISION_MAS);
 		mav.addObject("precision_menos", Constantes.PRECISION_MENOS);
 
-		List<MovimientosGuardados> allMovements = recorder.getAllMovements();
+//		List<MovimientosGuardados> allMovements = recorder.getAllMovements();
 		
-		List<String> nombresMovimientos = new LinkedList<String>();
-		for (MovimientosGuardados movimientosGuardados : allMovements) {
-			nombresMovimientos.add(movimientosGuardados.getNombre());
-		}
+//		List<String> nombresMovimientos = new LinkedList<String>();
+//		for (MovimientosGuardados movimientosGuardados : allMovements) {
+//			nombresMovimientos.add(movimientosGuardados.getNombre());
+//		}
 		
-		mav.addObject("nombresMovimientos",nombresMovimientos);
+//		mav.addObject("nombresMovimientos",nombresMovimientos);
 		
 		return mav;
 

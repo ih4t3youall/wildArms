@@ -135,15 +135,27 @@
 	}
 </script>
 
+<style type="text/css">
+
+.separator{
+padding-top: 50px;
+padding-bottom: 50px;
+
+}
+</style>
+
 </head>
 <body>
+<!-- <img src="resources/img/accenture.jpg"/> -->
+<div id="contenedor"  style="background-image: url('resources/img/accenture.jpg');background-repeat: no-repeat;background-color:black;padding-top: 400px;padding-bottom: 400px ">
+
 
 
 	<div class="row">
 		<div class="col-md-3"></div>
 		<div class="col-md-2">
 			<a href="#" class="btn btn-default" role="button"
-				onclick="mover('${cama_arriba}')">cama arriba</a>
+				onclick="mover('${cama_arriba}')">Brazo arriba</a>
 		</div>
 		<div class="col-md-2">
 			<a href="#" class="btn btn-default" role="button"
@@ -155,11 +167,14 @@
 		</div>
 		<div class="col-md-3"></div>
 	</div>
+	
+	<div class="separator"></div>
+	
 	<div class="row">
 		<div class="col-md-3"></div>
 		<div class="col-md-2">
 			<a href="#" class="btn btn-default" role="button"
-				onclick="mover('${cama_abajo}')">cama abajo</a>
+				onclick="mover('${cama_abajo}')">Brazo abajo</a>
 		</div>
 		<div class="col-md-2">
 			<a href="#" class="btn btn-default" role="button"
@@ -171,6 +186,7 @@
 		</div>
 		<div class="col-md-3"></div>
 	</div>
+	<div class="separator"></div>
 	<div class="row">
 		<div class="col-md-3"></div>
 		<div class="col-md-2">
@@ -184,6 +200,7 @@
 		</div>
 		<div class="col-md-3"></div>
 	</div>
+	<div class="separator"></div>
 	<div class="row">
 		<div class="col-md-3"></div>
 		<div class="col-md-2">
@@ -197,7 +214,7 @@
 		</div>
 		<div class="col-md-3"></div>
 	</div>
-
+<div class="separator"></div>
 	<div class="row">
 		<div class="col-md-3"></div>
 		<div class="col-md-2">&nbsp;</div>
@@ -208,7 +225,7 @@
 		<div class="col-md-2">&nbsp;</div>
 		<div class="col-md-3"></div>
 	</div>
-
+<div class="separator"></div>
 	<div class="row">
 		<div class="col-md-3">&nbsp;</div>
 		<div class="col-md-2">&nbsp;</div>
@@ -216,47 +233,9 @@
 		<div class="col-md-2">&nbsp;</div>
 		<div class="col-md-3">&nbsp;</div>
 	</div>
-	<div class="row">
-		<div class="col-md-3"></div>
-		<div class="col-md-2">
-			<a href="#" class="btn btn-default" role="button"
-				onclick="mover('${precision_mas}')">precision mas</a>
-		</div>
-		<div class="col-md-2">label</div>
-		<div class="col-md-2">
-			<a href="#" class="btn btn-default" role="button"
-				onclick="mover('${precision_menos}')">precision menos</a>
-		</div>
-		<div class="col-md-3"></div>
-	</div>
-
-	<div class="row">
-		<div class="col-md-3"></div>
-		<div class="col-md-2">
-			<a href="#" class="btn btn-default" role="button"
-				onclick="comenzarGrabacion()">Grabar Movimientos</a>
-		</div>
-		<div class="col-md-2">
-			<input id="nombreGrabacion" type="text" value="nombre"></input>
-		</div>
-		<div class="col-md-2">
-			<a href="#" class="btn btn-default" role="button"
-				onclick="detenerGrabacion()">Deteber grabacion</a>
-		</div>
-		<div class="col-md-3"></div>
-	</div>
 
 
-	<div id="tablaMovimientos"></div>
-	<div id="movimientosGuardados">
-		<c:forEach items="${nombresMovimientos}" var="item">
-
-			<input type="button" onClick="precargado('${item}')" value="${item}">
-			</intput>
-
-
-		</c:forEach>
-	</div>
+</div>
 
 
 
