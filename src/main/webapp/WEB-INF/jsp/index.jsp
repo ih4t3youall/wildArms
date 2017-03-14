@@ -163,8 +163,7 @@ padding-bottom: 400px ;
 
 body{
 /* background-image: url('resources/img/fondoAzul.png'); */
-
-
+background-color: black;
 }
 a{
 width:110px;
