@@ -162,7 +162,7 @@ padding-bottom: 400px ;
 }
 
 body{
-background-image: url('resources/img/fondoAzul.png');
+/* background-image: url('resources/img/fondoAzul.png'); */
 
 
 }
@@ -170,6 +170,8 @@ a{
 width:110px;
 }
 
+
+ 
 
 </style>
 
@@ -238,7 +240,7 @@ width:110px;
 		</div>
 		<div class="col-md-3"></div>
 	</div>
-	<div class="separator"></div>
+
 	<div class="row">
 		<div class="col-md-3"></div>
 		<div class="col-md-2">
