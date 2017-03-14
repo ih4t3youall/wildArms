@@ -138,16 +138,45 @@
 <style type="text/css">
 
 .separator{
-padding-top: 50px;
-padding-bottom: 50px;
+padding-top: 25px;
+padding-bottom: 25px;
 
 }
+
+.goDigital{
+
+background-image: url('resources/img/goDigital2.png');
+background-repeat: no-repeat;
+height:30%;
+width:10%";
+}
+
+#contenedor{
+/* background-image: url('resources/img/accenture.jpg'); */
+background-repeat: no-repeat;
+
+
+padding-top: 200px;
+padding-bottom: 400px ;
+
+}
+
+body{
+background-image: url('resources/img/fondoAzul.png');
+
+
+}
+a{
+width:110px;
+}
+
+
 </style>
 
 </head>
-<body>
+<body >
 <!-- <img src="resources/img/accenture.jpg"/> -->
-<div id="contenedor"  style="background-image: url('resources/img/accenture.jpg');background-repeat: no-repeat;background-color:black;padding-top: 400px;padding-bottom: 400px ">
+<div id="contenedor"  >
 
 
 
@@ -189,14 +218,23 @@ padding-bottom: 50px;
 	<div class="separator"></div>
 	<div class="row">
 		<div class="col-md-3"></div>
-		<div class="col-md-2">
+		<div class="col-md-1">
 			<a href="#" class="btn btn-default" role="button"
 				onclick="mover('${abrir_pinza}')">abrir pinza</a>
 		</div>
-		<div class="col-md-2"></div>
+		<div class="col-md-3"></div>
 		<div class="col-md-2">
 			<a href="#" class="btn btn-default" role="button"
 				onclick="mover('${cerrar_pinza}')">cerrar pinza</a>
+		</div>
+		<div class="col-md-3"></div>
+	</div>
+	<div class="row">
+		<div class="col-md-3"></div>
+		<div class="col-md-1">
+		</div>
+		<div class="col-md-3 goDigital"></div>
+		<div class="col-md-2">
 		</div>
 		<div class="col-md-3"></div>
 	</div>
