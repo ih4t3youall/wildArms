@@ -148,7 +148,7 @@ padding-bottom: 25px;
 background-image: url('resources/img/goDigital2.png');
 background-repeat: no-repeat;
 height:30%;
-width:10%";
+width:430px;
 }
 
 #contenedor{
@@ -156,8 +156,7 @@ width:10%";
 background-repeat: no-repeat;
 
 
-padding-top: 200px;
-padding-bottom: 400px ;
+padding-top: 50px;
 
 }
 
