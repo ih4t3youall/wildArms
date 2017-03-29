@@ -6,7 +6,7 @@
 <script src="resources/jquery.js"></script>
 <script src="resources/bootstrap/js/bootstrap.min.js"></script>
 <link href="resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-<title>Insert title here</title>
+<title>Accenture - GoDigital</title>
 
 <script type="text/javascript">
 	var nombreRecord;
