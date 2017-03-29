@@ -15,7 +15,68 @@
 
 	$(document).ready(function() {
 		$("#nombreGrabacion").val("");
+		
+		$('body').keypress(function (ev) {
+            var keycode = (ev.keyCode ? ev.keyCode : ev.which);
+            if (keycode == '13') {
+                
+            };
+            
+//             alert(keycode);
+            
+            switch (keycode) {
+            case 38:
+//                 mover("arriba")
+                mover('${cama_arriba}')
+                break;
+            case 113:
+//             	mover("q");
+            	mover('${munieca_arriba}')
+            	break;
+            case 108:
+            	mover('${encender_led}')
+            	break;
+            case 119:
+//             	mover("w");
+				mover('${munieca_abajo}')
+            	break;
+            case 40:
+            	mover('${cama_abajo}')
+//                 mover("abajo")
+                break;
+            case 37:
+            	mover('${izquierda}')
+//                 mover("izquierda")
+                break;
+            case 39:
+            	mover('${derecha}')
+//                 mover("derecha");
+                break;
+            case 97:
+            	mover('${adelante}')
+//                 mover("a");
+                break;
+            case 122:
+            	mover('${atras}')
+//                 mover("z");
+                break;
+            case 115:
+            	mover('${abrir_pinza}')
+//                mover("s");
+               break;
+            case 100:
+            	mover('${cerrar_pinza}')
+//             	mover("d");
+            	break;
+        }
+            
+            
+		});
+            
 	});
+	
+	
+	
 
 	function mover(movimiento) {
 
