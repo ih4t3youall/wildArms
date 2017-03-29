@@ -192,7 +192,7 @@ width:110px;
 		</div>
 		<div class="col-md-2">
 			<a href="#" class="btn btn-default" role="button"
-				onclick="mover('${munieca_arriba}')">muñeca arriba</a>
+				onclick="mover('${munieca_arriba}')">Muñeca arriba</a>
 		</div>
 		<div class="col-md-3"></div>
 	</div>
@@ -211,7 +211,7 @@ width:110px;
 		</div>
 		<div class="col-md-2">
 			<a href="#" class="btn btn-default" role="button"
-				onclick="mover('${munieca_abajo}')">muñeca abajo</a>
+				onclick="mover('${munieca_abajo}')">Muñeca abajo</a>
 		</div>
 		<div class="col-md-3"></div>
 	</div>
@@ -220,12 +220,12 @@ width:110px;
 		<div class="col-md-3"></div>
 		<div class="col-md-1">
 			<a href="#" class="btn btn-default" role="button"
-				onclick="mover('${abrir_pinza}')">abrir pinza</a>
+				onclick="mover('${abrir_pinza}')">Abrir pinza</a>
 		</div>
 		<div class="col-md-3"></div>
 		<div class="col-md-2">
 			<a href="#" class="btn btn-default" role="button"
-				onclick="mover('${cerrar_pinza}')">cerrar pinza</a>
+				onclick="mover('${cerrar_pinza}')">Cerrar pinza</a>
 		</div>
 		<div class="col-md-3"></div>
 	</div>
@@ -243,22 +243,22 @@ width:110px;
 		<div class="col-md-3"></div>
 		<div class="col-md-2">
 			<a href="#" class="btn btn-default" role="button"
-				onclick="mover('${izquierda}')">izquierda</a>
+				onclick="mover('${izquierda}')">Izquierda</a>
 		</div>
 		<div class="col-md-2"></div>
 		<div class="col-md-2">
 			<a href="#" class="btn btn-default" role="button"
-				onclick="mover('${derecha}')">derecha</a>
+				onclick="mover('${derecha}')">Derecha</a>
 		</div>
 		<div class="col-md-3"></div>
 	</div>
 <div class="separator"></div>
 	<div class="row">
-		<div class="col-md-3"></div>
 		<div class="col-md-2">&nbsp;</div>
+		<div class="col-md-3"></div>
 		<div class="col-md-2">
 			<a href="#" class="btn btn-default" role="button"
-				onclick="mover('${encender_led}')">encender led</a>
+				onclick="mover('${encender_led}')">Encender led</a>
 		</div>
 		<div class="col-md-2">&nbsp;</div>
 		<div class="col-md-3"></div>
